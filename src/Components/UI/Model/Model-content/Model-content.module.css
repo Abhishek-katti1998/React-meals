@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+.Container {
+  display: flex;
+  flex-flow: row wrap;
+  width: 90%;
+  /* height: 50px; */
+  border-bottom: 1px solid #fc8019;
+  margin-left: 25px;
+
+  /* background-color: #fc801; */
+}
+.Content {
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+  align-items: center;
+  width: 30%;
+  /* border: 2px solid red; */
+}
+.amount {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  top: 54px;
+  left: 10px;
+  border: 1px solid #282c34;
+
+  padding-left: 3px;
+}
+.remove,
+.add {
+  width: 30px;
+  height: 20px;
+  border: 2px solid #fc8019;
+  color: #fc8019;
+  position: relative;
+  top: 55px;
+  border-radius: 5px;
+}
+.add {
+  left: 250px;
+}
+.remove {
+  left: 270px;
+}
+
+.add:hover {
+  cursor: pointer;
+  background-color: white;
+}
+.remove:hover {
+  cursor: pointer;
+  background-color: white;
+}

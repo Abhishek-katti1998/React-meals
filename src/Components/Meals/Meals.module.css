@@ -1,0 +1,12 @@
+.Container {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: white;
+  width: 60%;
+  height: 700px;
+  border-radius: 10px;
+  margin: auto;
+  position: relative;
+  bottom: 300px;
+  /* border: 2px solid blue; */
+}

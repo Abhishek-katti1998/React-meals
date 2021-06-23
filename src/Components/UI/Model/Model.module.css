@@ -1,0 +1,39 @@
+.Container {
+  display: flex;
+  flex-flow: row wrap;
+  width: 40%;
+  /* height: 50%;  */
+  border-radius: 20px;
+  background-color: white;
+  position: fixed;
+  top: 220px;
+  left: 460px;
+  margin: auto;
+  align-items: center;
+  flex-grow: 1;
+  z-index: 10;
+  box-shadow: 2px 2px 1px gray;
+}
+.Close,
+.Order {
+  border: 1px solid #282c34;
+  border-radius: 20px;
+  width: 120px;
+  height: 40px;
+}
+.Close {
+  color: #fc8019;
+}
+.Order {
+  color: #fc8019;
+}
+.Order:hover {
+  cursor: pointer;
+  background-color: #fc8019;
+  color: white;
+}
+.Close:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #282c34;
+}

@@ -1,0 +1,15 @@
+.des {
+  width: 500px;
+  height: 150px;
+  margin: auto;
+  position: relative;
+  bottom: 320px;
+  color: white;
+  background-color: #282c34;
+  box-shadow: 5px 5px 5px rgb(177, 172, 172);
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+  justify-content: center;
+  border-radius: 10px;
+}
