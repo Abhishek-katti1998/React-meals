@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
-const ItemCountContext = React.createContext({ ingCount: [] });
+const ItemCountContext = React.createContext({
+  ingCount: [],
+  clearCart: function () {},
+});
 export default ItemCountContext;
 const CartHandlerContext = React.createContext({
   cartHandler: function () {},

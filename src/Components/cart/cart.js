@@ -3,7 +3,9 @@ import Button from "../layout/cartbtn/Button";
 const Cart = (props) => {
   return (
     <React.Fragment>
-      <Button />
+      <nav>
+        <Button />
+      </nav>
     </React.Fragment>
   );
 };

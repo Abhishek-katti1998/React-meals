@@ -1,0 +1,41 @@
+.search {
+  position: relative;
+  left: 520px;
+}
+.input {
+  border-bottom: 2px solid white;
+  width: 400px;
+}
+.input :focus {
+  /* color: white; */
+  /* border: 2px #282c34; */
+  border-bottom: 2px solid orange;
+}
+.input :active {
+  color: white;
+  border: 2px #282c34;
+  border-bottom: 2px solid orange;
+}
+.btn {
+  background-color: #282c34;
+  color: white;
+}
+.btn:hover {
+  cursor: pointer;
+  color: #fc8019;
+}
+@media screen and (width: 400px) {
+  .search {
+    left: auto;
+    position: relative;
+    left: 90px;
+  }
+  .input {
+    width: 200px;
+    height: 40px;
+  }
+  .btn {
+    height: 40px;
+    width: 80px;
+  }
+}

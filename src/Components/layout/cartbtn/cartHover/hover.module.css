@@ -1,0 +1,11 @@
+.Containe {
+  display: flex;
+  position: relative;
+  background-color: white;
+  flex-flow: column wrap;
+  /* border-radius: 10px; */
+  /* z-index: 1000; */
+  /* top: 1000px; */
+  /* margin: auto; */
+  left: 100px;
+}

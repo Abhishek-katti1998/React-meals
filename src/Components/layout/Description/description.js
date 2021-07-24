@@ -1,6 +1,6 @@
 import classes from "./description.module.css";
 const Description = () => {
-  console.log("renderCalled______Description.js");
+  // console.log("renderCalled______Description.js");
   return (
     <div className={classes.des}>
       <h3>Will be deliverd at your door step :)</h3>

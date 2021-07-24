@@ -8,8 +8,7 @@ const Total = () => {
       return Number(el.price.split("$")[1]) * el.ingCount;
     })
     .reduce((el, acc) => el + acc, 0);
-  // console.log("TOTALPRICE", totalPrice);
-  console.log("rendercalled_____Total.js");
+
   return (
     <div className={classes.Container}>
       <h3 style={{ position: "relative", left: "50px" }}>Total Amount</h3>

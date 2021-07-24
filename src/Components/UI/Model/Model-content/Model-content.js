@@ -12,7 +12,7 @@ const ModelContent = (props) => {
     <div className={classes.Container}>
       <div className={classes.Content}>
         <h3>{props.dish}</h3>
-        <div style={{ position: "relative", bottom: "10px", color: "#282c34" }}>
+        <div style={{ position: "relative", bottom: "10px", color: "white" }}>
           {props.price}
         </div>
       </div>
@@ -21,6 +21,7 @@ const ModelContent = (props) => {
           style={{
             fontSize: "15px",
             position: "relative",
+            color: "white",
             bottom: "17px",
             right: "1px",
           }}

@@ -1,31 +1,36 @@
 import "./App.css";
+import TransitionGroup from "react-transition-group/Transition";
 import Background from "./Components/layout/header/header";
 import MainCourse from "./Components/Meals/Meals";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import ItemCountContext from "./Context/Item-count-context";
 import { CartHandlerContext } from "./Context/Item-count-context";
-import { AddInitially } from "./Context/Item-count-context";
-// import { someThing } from "./Helpers/helper";
+import AuthContext from "./Context/AuthContext";
 import classes from "./Components/layout/cartbtn/Button.module.css";
-// import BackDrop from "./Components/UI/Backdrop/backdrop";
+import Auth from "./Components/UI/Auth/Auth";
 import {
   AddItemCartContext,
   RemoveItemCartContext,
 } from "./Context/Item-count-context";
 import Model from "./Components/UI/Model/Model";
 import BackDrop from "./Components/UI/Backdrop/backdrop";
-function App() {
-  //+------------------------------------default Food Items(START)--------------------------------------------------------+
+import Spinner from "./Components/UI/spinner/spinner";
+import ErrorComponent from "./Components/UI/Error/error";
 
+function App() {
+  //****default Food Items****
+  const AuthCtx = useContext(AuthContext);
   const items = [
     {
       dish: "Sushi",
+      index: 0,
       foodDescription: "fesh fish and veggies",
       price: "$22",
       ingCount: 0,
     },
     {
       dish: "Schnitzel",
+      index: 1,
       foodDescription: "A general speciality",
       price: "$16",
       ingCount: 0,
@@ -33,24 +38,24 @@ function App() {
     {
       dish: "Bawarchi Biryani",
       foodDescription: "Hydrabad special",
+      index: 2,
       price: "$25",
       ingCount: 0,
     },
   ];
-
-  //+------------------------------------default Food Items(END)--------------------------------------------------------+
-
-  //---------------------------------------Main Course food items functionality(add and remove)(START)-------------------
+  //**************************************************************
+  //Main Course food items functionality(add and remove)
   const [showModel, setModel] = useState(false);
   const [showBup, setShowBump] = useState(false);
-  const [ing, setIngCount] = useState(items);
+  const [ing, setIngCount] = useState([]);
+  const [isLoading, setLoadingState] = useState(false);
+  const [loadingErr, setLoadingErr] = useState(false);
   const ingUpdate = (targetIndex, flag) => {
     let tempIngCnt = [...ing];
 
     if (flag === 1) tempIngCnt[targetIndex].ingCount += 1;
     if (flag === -1) {
       if (tempIngCnt[targetIndex].ingCount === 0) {
-        console.log("clicked last time");
       }
       tempIngCnt[targetIndex].ingCount -= 1;
     }
@@ -74,11 +79,31 @@ function App() {
     .map((el) => el.ingCount)
     .reduce((el, acc) => el + acc, 0);
 
-  //---------------------------------------Main Course food items functionality(add and remove)(END)-------------------
+  //******************************************************************
 
-  //------------------------------------------Cart functionality(START),along with Model-----------------------------------------------------
+  //******************************************************************
+  //Cart functionality(START),along with Model
+  const fetchMeals = useCallback(() => {
+    setLoadingState(true);
+    fetch(
+      "https://react-http-3d0d9-default-rtdb.firebaseio.com/-MdquxpaGp0BSa5Cvrpi.json"
+    )
+      .then((el) => el.json())
+      .then((el) => {
+        let data = Object.values(el);
 
+        setLoadingState(false);
+        setIngCount(data);
+      })
+      .catch((err) => {
+        setLoadingErr(true);
+      });
+  }, [AuthCtx.isLoggedIn]);
   useEffect(() => {
+    fetchMeals();
+  }, []);
+  useEffect(() => {
+    if (ing.length === 0) return;
     if (ing.map((el) => el.ingCount).reduce((el, acc) => el + acc) === 0)
       return;
     setShowBump(true);
@@ -97,60 +122,80 @@ function App() {
     if (cartCount === 0) return;
     setModel((prevState) => !prevState);
   };
-  //---------------------------adding items in the Model Widnow(START)-------------------------------------------
-
+  //***************************************************************
+  //adding items in the Model Widnow
   const addHandlerModel = function (event) {
     ingUpdate(event.target.id, 1);
   };
   const removeHandlerModel = function (event) {
-    // if (event.target.id === 0) {
-    //   setModel(false);
-    // }
-
     ingUpdate(event.target.id, -1);
+    setModel(false);
   };
-  //---------------------------adding items in the Model Widnow()-------------------------------------------
-  //--------------------------------------------Cart functionality(END),along with Model------------------------------------------------
+  //******************************************************************
 
-  //--------------------------------BackDrop(removing)(START)---------------------------------------------------
+  //******************************************************************
+  //-->BackDrop(removing)
   const removeBackDropHandler = () => {
     setModel(false);
   };
-  //--------------------------------BackDrop(removing)(END)---------------------------------------------------
-
-  console.log("render____called____App.js");
+  //******************************************************************
+  //close Model after ordering
+  const closeModelHandler = () => {
+    // setIngCount(arg);
+    setModel(false);
+  };
+  useEffect(() => {
+    return () => {
+      console.log("[APP.js] removed");
+    };
+  }, []);
   return (
     <div className="App">
-      {showModel && totalIng ? (
-        <BackDrop click={removeBackDropHandler} />
-      ) : null}
-      <CartHandlerContext.Provider
-        value={{ cartHandler: cartHandler, classes: btnClass }}
-      >
-        <ItemCountContext.Provider value={{ ingCount: ing }}>
-          <Background />
-          <AddInitially.Provider
-            value={{
-              addBtnHandler: addInitialBtnHandler,
-            }}
+      {isLoading ? <BackDrop /> : null}
+      {isLoading ? <Spinner /> : null}
+      {AuthCtx.isLoggedIn && !isLoading ? (
+        <React.Fragment>
+          {showModel && totalIng ? (
+            <BackDrop click={removeBackDropHandler} />
+          ) : null}
+          <CartHandlerContext.Provider
+            value={{ cartHandler: cartHandler, classes: btnClass }}
           >
-            <MainCourse
-              addHandler={addHandler}
-              removeHandler={removeHandler}
-              ing={ing}
-              items={items}
-            />
-          </AddInitially.Provider>
-
-          <AddItemCartContext.Provider value={{ addHandler: addHandlerModel }}>
-            <RemoveItemCartContext.Provider
-              value={{ removeHandler: removeHandlerModel }}
+            <ItemCountContext.Provider
+              value={{ ingCount: ing, clearCart: closeModelHandler }}
             >
-              {showModel && totalIng ? <Model /> : null}
-            </RemoveItemCartContext.Provider>
-          </AddItemCartContext.Provider>
-        </ItemCountContext.Provider>
-      </CartHandlerContext.Provider>
+              <Background />
+              {isLoading ? (
+                <React.Fragment>
+                  <BackDrop />
+                  {!loadingErr ? <Spinner /> : <ErrorComponent />}
+                </React.Fragment>
+              ) : (
+                <MainCourse
+                  addHandler={addHandler}
+                  addInitialBtnHandler={addInitialBtnHandler}
+                  removeHandler={removeHandler}
+                  ing={ing}
+                  items={items}
+                />
+              )}
+
+              <AddItemCartContext.Provider
+                value={{ addHandler: addHandlerModel }}
+              >
+                <RemoveItemCartContext.Provider
+                  value={{ removeHandler: removeHandlerModel }}
+                >
+                  {/* {showModel && totalIng ? ( */}
+                  <Model cartHandler={cartHandler} show={showModel} />
+                  {/* // ) : null} */}
+                </RemoveItemCartContext.Provider>
+              </AddItemCartContext.Provider>
+            </ItemCountContext.Provider>
+          </CartHandlerContext.Provider>{" "}
+        </React.Fragment>
+      ) : null}
+      {!AuthCtx.isLoggedIn && !isLoading ? <Auth /> : null}
     </div>
   );
 }

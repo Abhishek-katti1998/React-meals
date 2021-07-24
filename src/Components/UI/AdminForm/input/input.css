@@ -1,0 +1,109 @@
+form-control {
+  margin-bottom: 1rem;
+}
+.rootFormOpen,
+.rootFormClose {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: #282c34;
+  width: 500px;
+  align-items: center;
+  border-radius: 10px;
+  z-index: 10;
+  position: fixed;
+  top: 120px;
+  left: 510px;
+  box-shadow: 5px 5px 5px rgb(177, 172, 172);
+  transition: all 0.5s ease-out;
+}
+.rootFormOpen {
+  opacity: 1;
+  transform: translateY(0);
+}
+.rootFormClose {
+  opacity: 0;
+  position: absolute;
+  /* bottom: -1000px; */
+  transform: translateY(-100%);
+}
+.form-control input,
+.form-control label {
+  display: block;
+}
+
+.form-control label {
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.form-control input,
+.form-control select {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.form-control input:focus {
+  outline: none;
+  border-color: #240370;
+  background-color: #e0d4fd;
+}
+
+.control-group {
+  display: flex;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-group .form-control {
+  min-width: 15rem;
+  flex: 1;
+}
+.ipBtn {
+  /* margin-top: 20px; */
+  background-color: #282c34;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+}
+.ipBtn:hover {
+  cursor: pointer;
+  color: orangered;
+  background-color: white;
+}
+
+.form-actions {
+  text-align: right;
+}
+
+.form-actions button {
+  margin-left: 1rem;
+}
+
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.error-text {
+  color: orangered;
+}
+@media screen and (width: 400px) {
+  .rootForm {
+    left: -76px;
+    z-index: 11;
+  }
+}

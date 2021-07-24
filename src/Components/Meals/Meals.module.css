@@ -1,12 +1,59 @@
 .Container {
   display: flex;
   flex-flow: column wrap;
-  background-color: white;
+  background-color: #282c34;
+  color: white;
   width: 60%;
-  height: 700px;
+  box-shadow: 5px 5px 5px rgb(177, 172, 172);
+  /* height: 700px; */
   border-radius: 10px;
   margin: auto;
   position: relative;
   bottom: 300px;
   /* border: 2px solid blue; */
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fc8019;
+  border-radius: 20px;
+  width: 90px;
+  height: 30px;
+  position: relative;
+  top: 50px;
+  left: 810px;
+  color: white;
+}
+.btnPrev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fc8019;
+  border-radius: 20px;
+  width: 90px;
+  height: 30px;
+  position: relative;
+  top: 80px;
+  left: 15px;
+  color: white;
+}
+@media screen and (width: 400px) {
+  .btn {
+    position: relative;
+    left: 140px;
+  }
+  .btnPrev {
+    position: relative;
+    left: 20px;
+  }
+}
+.btnPrev:hover {
+  background-color: white;
+  color: #fc8019;
+}
+.btn:hover {
+  background-color: white;
+  color: #fc8019;
 }

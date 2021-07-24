@@ -12,13 +12,21 @@
   width: auto;
   height: auto;
   font-weight: bold;
+  right: 10px;
+  position: absolute;
+  bottom: 10px;
 }
-
+@media screen and (width: 400px) {
+  .button {
+    display: none;
+    all: none;
+  }
+}
 .button:hover,
 .button:active {
   /* background-color: orangered; */
-  color: #282c34;
-  background-color: #fc8019;
+  color: #fc8019;
+  /* background-color: #fc8019; */
 }
 .bump {
   animation: bump 300ms ease-out;

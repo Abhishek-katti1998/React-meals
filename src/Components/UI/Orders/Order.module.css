@@ -1,0 +1,20 @@
+.button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+
+  padding: 0.75rem 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: auto;
+  height: auto;
+  font-weight: bold;
+  z-index: 11;
+}
+
+.button:hover,
+.button:active {
+  color: #fc8019;
+}

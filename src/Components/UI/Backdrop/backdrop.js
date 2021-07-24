@@ -9,7 +9,6 @@ const BackDropOverlay = (props) => {
   );
 };
 const BackDrop = (props) => {
-  console.log("render__called_______Backdrop.js");
   return (
     <React.Fragment>
       {ReactDOM.createPortal(

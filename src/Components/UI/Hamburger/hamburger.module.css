@@ -1,0 +1,14 @@
+.Container {
+  position: fixed;
+  z-index: 10;
+  left: 20px;
+}
+.Container:hover {
+  cursor: pointer;
+}
+.parts {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+}

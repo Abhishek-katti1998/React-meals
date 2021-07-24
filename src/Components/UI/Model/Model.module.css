@@ -1,25 +1,46 @@
-.Container {
+.ContainerOpend,
+.ContainerClosed {
+  position: absolute;
   display: flex;
   flex-flow: row wrap;
   width: 40%;
-  /* height: 50%;  */
   border-radius: 20px;
-  background-color: white;
-  position: fixed;
+  background-color: #282c34;
+  color: white;
+  box-shadow: 5px 5px 5px grey;
+  align-items: center;
+
+  box-shadow: 2px 2px 1px gray;
   top: 220px;
   left: 460px;
   margin: auto;
-  align-items: center;
-  flex-grow: 1;
-  z-index: 10;
-  box-shadow: 2px 2px 1px gray;
+  z-index: 100;
+  transition: all 0.5s ease-out;
+  /* display: flex; */
 }
+.ContainerOpend {
+  /* display: flex; */
+
+  opacity: 1;
+  transform: translateY(0);
+}
+.ContainerClosed {
+  /* display: none; */
+
+  /* bottom: -1000px; */
+  opacity: 0;
+  z-index: 0;
+  transform: translateY(-100%);
+}
+
 .Close,
 .Order {
   border: 1px solid #282c34;
   border-radius: 20px;
   width: 120px;
+
   height: 40px;
+  z-index: 100;
 }
 .Close {
   color: #fc8019;
