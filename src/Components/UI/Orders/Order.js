@@ -1,12 +1,8 @@
 import classes from "./Order.module.css";
 
 const Order = (props) => {
-  const renderOrderHandler = () => {
-    console.log(JSON.parse(localStorage.getItem("data")));
-  };
-
   return (
-    <button className={classes.button} onClick={renderOrderHandler}>
+    <button className={classes.button} onClick={props.renderOrderHandler}>
       Your Orders
     </button>
   );

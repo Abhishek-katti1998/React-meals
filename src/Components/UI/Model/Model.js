@@ -73,7 +73,6 @@ const ModelOverlay = (props) => {
   );
 };
 const Model = (props) => {
-  console.log(props.add);
   return (
     <React.Fragment>
       {ReactDOM.createPortal(

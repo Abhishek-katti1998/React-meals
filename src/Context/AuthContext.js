@@ -25,7 +25,6 @@ export const AuthContextProvider = (props) => {
     }
   };
   const remainingExpTime = (expirationTimeStamp) => {
-    console.log(new Date(expirationTimeStamp).getTime());
     return new Date(expirationTimeStamp).getTime() - new Date().getTime();
   };
   const setDisplayName = (name) => {
@@ -37,7 +36,6 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("token", token);
     localStorage.setItem("email", email);
     const remainingTime = remainingExpTime(expirationTime);
-    console.log(remainingTime);
     timer = setTimeout(logOutHandler, remainingTime);
   };
   const authContextValue = {

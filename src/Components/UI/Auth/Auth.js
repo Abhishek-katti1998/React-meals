@@ -1,17 +1,14 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import AuthContext from "../../../Context/AuthContext";
-import { Link } from "react-router-dom";
-
 import classes from "./Auth.module.css";
-import BtnSpinner from "../spinner/btnspinner/spinner";
-
 const AuthForm = (props) => {
   const [isLogin, setIsLogin] = useState(true);
   const [err, setError] = useState("");
   const emailRef = useRef();
   const paswRef = useRef();
   const AuthCtx = useContext(AuthContext);
-
+  const [uiMessege, setUiMessege] = useState("");
+  let timer;
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
@@ -44,6 +41,11 @@ const AuthForm = (props) => {
               new Date().getTime() + Number(el.expiresIn) * 1000
             );
             AuthCtx.logIn(el.idToken, expirationTime, enteredEmail);
+          } else {
+            setUiMessege("Succesfully Created Account!!Please login:)");
+            timer = setTimeout(() => {
+              setUiMessege("");
+            }, 4000);
           }
         }
       });
@@ -62,12 +64,15 @@ const AuthForm = (props) => {
     paswRef.current.value = "";
   };
   useEffect(() => {
-    console.log("authlog useEffect");
     localStorage.removeItem("name");
     localStorage.removeItem("data");
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
   return (
     <section className={classes.auth}>
+      <p style={{ color: "green" }}>{uiMessege}</p>
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
 
       <form onSubmit={submitHandler}>

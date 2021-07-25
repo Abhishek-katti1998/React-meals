@@ -25,7 +25,6 @@ const Ham = (props) => {
           !localStorage.getItem("data") &&
           !localStorage.getItem("name")
         ) {
-          console.log("ANIMATIN");
           const promise = apiCall();
           promise
             .then((el) => {
